@@ -28,8 +28,9 @@ while i < number:
 
 	active = IntVar();
 	active.set(0);
-	
+
 	Question = str(input())
+	typeofans = str(input())
 	Answer1 = str(input())
 	Answer2 = str(input())
 	Answer3 = str(input())
