@@ -28,12 +28,13 @@ while i < number:
 
 	active = IntVar();
 	active.set(0);
-
-	Answer1 = str("1")
-	Answer2 = str("2")
-	Answer3 = str("3")
-	Answer4 = str("4")
-	Question = "Question"
+	
+	Question = str(input())
+	Answer1 = str(input())
+	Answer2 = str(input())
+	Answer3 = str(input())
+	Answer4 = str(input())
+	
 
 	radiobutton1 = Radiobutton(page, text = Answer1, variable = active, value = 0, font = ('Helvetica', 14))
 	radiobutton2 = Radiobutton(page, text = Answer2, variable = active, value = 1, font = ('Helvetica', 14))
@@ -68,6 +69,7 @@ while i < number:
 		checkbutton2.place(x = 0, y = 100)
 		checkbutton3.place(x = 0, y = 150)
 		checkbutton4.place(x = 0, y = 200)
+
 	labelQuestion.config(text=Question)
 
 	labelQuestion.pack(side = TOP)
