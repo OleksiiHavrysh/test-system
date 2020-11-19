@@ -4,10 +4,11 @@ from PIL import ImageTk, Image
 file = open("input.txt", 'r')
 #pip install pillow 
 
-page = Tk()
-page.title("Тестирующая система")
-page.geometry("500x400")
-page.configure(bg = 'grey')
+root = Tk()
+root.title("Тестирующая система")
+root.geometry("500x400")
+root.configure(bg = 'grey')
+root.resizable(width=False, height=False)
 number = int(file.readline().rstrip("\n"))
 typeofans = "1"
 flag = False
@@ -15,75 +16,85 @@ flag = False
 atleastonce = False
 numofans = int(0)
 
+score = int(0)
+notend = True
+firststart = True
 
+labelQuestion = Label(root, text = "", font = ('Helvetica', 14, 'bold'))
 
+rows, cols = (20, 11) 
 
-labelQuestion = Label(page, text = "", font = ('Helvetica', 14, 'bold'))
-
-rows, cols = (11, 11) 
-
-radiobuttons = [[]*cols]*rows
-checkbuttons = [[]*cols]*rows
-images = [[]*cols]*rows
-numRad = 0
-numCheck = 0
-numImg = 0
 
 prev = -1
 j = int(0)
-'''
+
 def Increm():
+    global j
+    j += 1
+    j = min (number, j)
+def Decrem():
+    global j
     j -= 1
-'''
-nextButton = Button(page, text = "Следующий вопрос", background="#555", foreground="white")
-#, command = Increm()
-previousButton = Button(page, text = "Предыдущий вопрос", background="#555", foreground="white")
-nextButton.place(x = 300, y = 300)
-previousButton.place(x = 100, y = 300)
+    j = max (0, j)
+def EndTest():
+    global notend
+    if firststart == False:
+        notend = True
+nextButton = Button(root, text = "Следующий вопрос", background="#555", foreground="white", command = lambda: Increm())
+previousButton = Button(root, text = "Предыдущий вопрос", background="#555", foreground="white", command = lambda: Decrem())
+endButton = Button(root, text = "Завершить тест", background="#555", foreground="white", command = lambda: EndTest())
+nextButton.place(x = 320, y = 300)
+previousButton.place(x = 50, y = 300)
+endButton.place(x = 200, y = 300)
 
-while j < number:
 
-    if j == prev:
-        j += 1
-        continue
-    else: 
-        prev = j
-        j += 1
-    active = IntVar();
-	#active.set(0);
-    numofans = int(file.readline().rstrip("\n"))
-    typeofans = str(file.readline().rstrip("\n"))
-    Question = str(file.readline().rstrip("\n"))
-    Question = Question.rstrip("\n")
-    i = 0
-    Answers = []
-    for i in range(numofans):
-	    Answers.append(str(file.readline().rstrip("\n")))
-	    Answers[i] = Answers[i].rstrip("\n")
+
+Questions = []
+Answers = [[]*rows]*cols
+typeofans = []
+numofans = []
+def input_():
+	global number, numofans
+	for i in range(number):
+		numofans.append(int(file.readline().rstrip("\n")))
+		typeofans.append(str(file.readline().rstrip("\n")))
+		Questions.append(str(file.readline().rstrip("\n")))
+    	
+		for j in range(numofans[i]):
+			Answers[i][j] = (str(file.readline().rstrip("\n")))
+			#Answers[i][j] = Answers[i][j].rstrip("\n")
+	notend = True
+
 	
+input_()
+
+notend == False
+j = 0
+
+while notend:
+    radiobuttons = []
+    checkbuttons = []
+    images = []
+    firststart = False
+    active = IntVar();
     i = 0
-    if typeofans == '1':
-        numRad = 0
-        for i in range(numofans):
-            numRad += 1
-            radiobuttons[j].append(Radiobutton(page, text = Answers[i], variable = active, value = j*10+numRad, font = ('Helvetica', 14)))
-            radiobuttons[j][i].place(x = 0, y = 50+i*250/numofans)
-    if typeofans == '2':
-        numCheck = 0
-        for i in range(numofans):
-            numCheck += 1
-            checkbuttons[j].append(Checkbutton(page, text = Answers[i], font = ('Helvetica', 14)))
-            checkbuttons[j][i].place(x = 0, y = 50+i*250/numofans)
-    if typeofans == '3':
-        numImg = 0
-        for i in range(numofans):
-            numImg += 1
-            images.append(ImageTk.PhotoImage(Image.open(Answers[i])))
-            panel = Label(page, image = images[i], width = 10, height = 10)
+    if typeofans[j] == '1':
+        for i in range(numofans[j]):
+            radiobuttons.append(Radiobutton(root, text = Answers[j][i], variable = active, value = j*10+i, font = ('Helvetica', 14)))
+            radiobuttons[i].place(x = 0, y = 50+i*250/numofans[j])
+    if typeofans[j] == '2':
+        for i in range(numofans[j]):
+            checkbuttons.append(Checkbutton(root, text = Answers[j][i], font = ('Helvetica', 14)))
+            checkbuttons[i].place(x = 0, y = 50+i*250/numofans[j])
+    if typeofans[j] == '3':
+        for i in range(numofans[j]):
+            images.append(ImageTk.PhotoImage(Image.open(Answers[j][i])))
+            panel = Label(root, image = images[i], width = 10, height = 10)
             panel.pack(side = LEFT, fill = "both", expand = "yes")
 
-    labelQuestion.config(text=Question)
+    labelQuestion.config(text=Questions[j])
 
     labelQuestion.pack(side = TOP)
+    root.mainloop()
 
-page.mainloop()
+#root.mainloop()
