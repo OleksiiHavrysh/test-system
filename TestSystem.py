@@ -22,7 +22,64 @@ yscrollbar.pack(side=RIGHT,fill="y")
 
 mycanvas.configure(yscrollcommand = yscrollbar.set)
 
+<<<<<<< HEAD
 mycanvas.bind('<Configure>', lambda e: mycanvas.configure(scrollregion = mycanvas.bbox('all')))
+=======
+prev = -1
+j = int(0)
+
+Questions = []
+Answers = [[]*rows]*cols
+typeofans = []
+numofans = []
+def input_():
+	global number, numofans
+	for i in range(number):
+		numofans.append(int(file.readline().rstrip("\n")))
+		typeofans.append(str(file.readline().rstrip("\n")))
+		Questions.append(str(file.readline().rstrip("\n")))
+		for j in range(numofans[i]):
+			Answers[i].append(str(file.readline().rstrip("\n")))
+			#Answers[i][j] = Answers[i][j].rstrip("\n")
+                
+		#random.shuffle(Answers[i])
+	#random.shuffle(Answers)
+	notend = True
+
+input_()
+
+def Increm():
+    global j
+    j += 1
+    j = min (number - 1, j)
+def Decrem():
+    global j
+    j -= 1
+    j = max (0, j)
+def EndTest():
+    global notend
+    if firststart == False:
+        notend = False
+        if typeofans[j] == '1':
+            for i in range(numofans[j]):
+                    radiobuttons[i].destroy()
+        if typeofans[j] == '2':
+            for i in range(numofans[j]):
+                    checkbuttons[i].destroy()
+
+        labelQuestion.destroy()
+        nextButton.destroy()
+        previousButton.destroy()
+        endButton.destroy()
+        
+        
+nextButton = Button(root, text = "Следующий вопрос", background="#555", foreground="white", command = lambda: Increm())
+previousButton = Button(root, text = "Предыдущий вопрос", background="#555", foreground="white", command = lambda: Decrem())
+endButton = Button(root, text = "Завершить тест", background="#555", foreground="white", command = lambda: EndTest())
+nextButton.place(x = 320, y = 300)
+previousButton.place(x = 50, y = 300)
+endButton.place(x = 200, y = 300)
+>>>>>>> d92d22da31062e5368fe1772471808bce7203c48
 
 myframe = Frame(mycanvas)
 mycanvas.create_window((0,0), window = myframe, anchor = "nw")
@@ -30,6 +87,7 @@ mycanvas.create_window((0,0), window = myframe, anchor = "nw")
 wrapper1.pack(fill="both", expand="yes", padx=10,pady=10)
 wrapper2.pack(fill="y", expand="no", padx=0,pady=15)
 
+<<<<<<< HEAD
 rows, cols = (20, 11)
 number = int(file.readline().rstrip("\n"))
 score = int(0)
@@ -165,3 +223,41 @@ for i in range(number):
 
 
 win.mainloop()
+=======
+	
+
+notend == False
+j = 0
+
+while notend:
+    radiobuttons = []
+    checkbuttons = []
+    images = []
+    firststart = False
+    active = IntVar();
+    i = 0
+    if typeofans[j] == '1':
+        if not firststart:
+            for i in radiobuttons:
+                radiobuttons[i].destroy()
+        for i in range(numofans[j]):
+            radiobuttons.append(Radiobutton(root, text = Answers[j][i], variable = active, value = j*10+i, font = ('Helvetica', 14)))
+            radiobuttons[i].place(x = 0, y = 50+i*250/numofans[j])
+    if typeofans[j] == '2':
+        if not firststart:
+            for i in checkbuttons:
+                checkbuttons[i].destroy()
+        for i in range(numofans[j]):
+            checkbuttons.append(Checkbutton(root, text = Answers[j][i], font = ('Helvetica', 14)))
+            checkbuttons[i].place(x = 0, y = 50+i*250/numofans[j])
+    #if typeofans[j] == '3':
+        #for i in range(numofans[j]):
+            #images.append(ImageTk.PhotoImage(Image.open(Answers[j][i])))
+            #panel = Label(root, image = images[i], width = 10, height = 10)
+            #panel.pack(side = LEFT, fill = "both", expand = "yes")
+
+    labelQuestion.config(text=Questions[j])
+    labelQuestion.pack(side = TOP)
+    root.mainloop()
+
+>>>>>>> d92d22da31062e5368fe1772471808bce7203c48

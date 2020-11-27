@@ -1,18 +1,29 @@
+<<<<<<< HEAD
 10
 5
 1
+=======
+3
+5
+2
+>>>>>>> d92d22da31062e5368fe1772471808bce7203c48
 who are u?
 Oleg
 Igor
 Alexey
 Tolik
 Dima
+<<<<<<< HEAD
 5
+=======
+1
+>>>>>>> d92d22da31062e5368fe1772471808bce7203c48
 1
 drg
 drgdrgdrg
 1
 2
+<<<<<<< HEAD
 1
 1
 1
@@ -47,3 +58,7 @@ drgdrgdrg
 1
 1
 1
+=======
+gdrgdrgdgdf
+drgdrgdrgfgdfgdrtg
+>>>>>>> d92d22da31062e5368fe1772471808bce7203c48
