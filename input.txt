@@ -8,13 +8,13 @@
 9999
 3
 2
-Їсти безпечно:
-Яблуко
-Апельсин
-Уран
+Eat safely:
+Apple
+Orange
+Mercury
 5
 1
-Який зараз рік?
+What year is it now?
 1900
 2007
 2019
@@ -22,15 +22,15 @@
 2021
 4
 2
-Що із цого є рослинами:
-Бук
-Заяць
-Клен
-Олень
+Which of these are plants:
+Apple
+Deer
+Oak
+Horse
 4
 1
-День Незалежності України:
-24 червня
-22 липня
-23 грудня
-24 серпня
+Independence Day of Ukraine:
+June 24
+July 22
+December 23
+August 24

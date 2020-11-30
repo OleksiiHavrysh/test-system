@@ -1,14 +1,13 @@
-import sys
 from tkinter import *
 from tkinter import ttk, IntVar
 from array import *
 import random
 # from PIL import ImageTk, Image
-from PySide2.QtWidgets import *
+#from PySide2.QtWidgets import *
 
-file = open("input.txt", 'r', encoding="utf8")
+file = open("input.txt", 'r', encoding='utf-8', errors='ignore')
 # pip install pillow
-trueans = open("trueans.txt", 'r', encoding="utf8")
+trueans = open("trueans.txt", 'r', encoding='utf-8', errors='ignore')
 
 win = Tk()
 win.title("Тестувальна система")
@@ -127,8 +126,8 @@ def count():
     for i in range(number):
         if selected[i] == real[i]:
             score += 1
-    label = Label(win, text="Очків: " + str(score) + "/" + str(number)+"\nБалів: " + str(float((score/number)*12)), font=('Helvetica', 20, 'bold'))
-    label.pack(anchor='center')
+    label = Label(win, text="Очків: " + str(score) + "/" + str(number)+"\nБалів: " + str(round(float((score/number)*12),2)), font=('Helvetica', 20, 'bold'))
+    label.place(x = 180, y = 150)
 
 
 def EndTest():
@@ -140,7 +139,7 @@ def EndTest():
 
 
 endButton = Button(win, text="Завершити тест", background="#555", foreground="white", command=lambda: EndTest())
-endButton.place(x=200, y=370)
+endButton.place(x=220, y=370)
 
 radioup = [0] * 10000
 
@@ -168,8 +167,8 @@ def Next():
         main(id + 1)
 
 
-Next = Button(win, text="Next", background="#555", foreground="white", command=Next)
-Next.place(x=100, y=370)
+Next = Button(win, text="Наступне", background="#555", foreground="white", command=Next)
+Next.place(x=150, y=370)
 
 
 def CheckSelected(check):
@@ -192,7 +191,7 @@ def main(i):
     for j in range(numofans[i]):
         if typeofans[i] == "1":
             # print(j+1)
-            active.set(j)
+            active.set(-1)
             radio.append(
                 Radiobutton(myframe, text=Answers[i][j], variable=active, value=i * 20 + j))
             radio[j].pack(anchor=NW)
